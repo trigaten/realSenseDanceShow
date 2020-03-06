@@ -47,21 +47,23 @@ try:
                             d = 2
                         else:
                             d = 1
+                        color_image[y+i+50][x+j+50][0] = int(0.1 * depth_image[y+i+50][x+j+50])
+                        color_image[y+i+50][x+j+50][1] = int(0.1 * depth_image[y+i+50][x+j+50])
+                        color_image[y+i+50][x+j+50][2] = int(0.1 * depth_image[y+i+50][x+j+50])
                             
-                            
-                        if x > 120:
-                            if x > 240:
-                                color_image[y+i+50][x+j+50][0] = d * 150
-                                color_image[y+i+50][x+j+50][1] = d * 1
-                                color_image[y+i+50][x+j+50][2] = d * 1
-                            else:
-                                color_image[y+i+50][x+j+50][0] = d * 1
-                                color_image[y+i+50][x+j+50][1] = d * 100
-                                color_image[y+i+50][x+j+50][2] = d * 1
-                        else:
-                            color_image[y+i+50][x+j+50][0] = d * 5
-                            color_image[y+i+50][x+j+50][1] = d * 5
-                            color_image[y+i+50][x+j+50][2] = d * 50
+                        # if x > 120:
+                        #     if x > 240:
+                        #         color_image[y+i+50][x+j+50][0] = d * 150
+                        #         color_image[y+i+50][x+j+50][1] = d * 1
+                        #         color_image[y+i+50][x+j+50][2] = d * 1
+                        #     else:
+                        #         color_image[y+i+50][x+j+50][0] = d * 1
+                        #         color_image[y+i+50][x+j+50][1] = d * 100
+                        #         color_image[y+i+50][x+j+50][2] = d * 1
+                        # else:
+                        #     color_image[y+i+50][x+j+50][0] = d * 5
+                        #     color_image[y+i+50][x+j+50][1] = d * 5
+                        #     color_image[y+i+50][x+j+50][2] = d * 50
 
         # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
         depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)

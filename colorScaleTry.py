@@ -1,4 +1,5 @@
 
+
 import pyrealsense2 as rs
 import numpy as np
 import cv2
@@ -11,7 +12,7 @@ height = user32.GetSystemMetrics(1)
 print(width)
 # ctrl alt m to stop code
 # Configure depth and color streams
-
+r = range(150)
 pipeline = rs.pipeline()
 config = rs.config()
 config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
@@ -34,27 +35,19 @@ try:
 
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
-        
-        # for x in range(len(color_image)-300):
-        #     for y in range(len(color_image[0])-300):
-        #         # color_image[x][y][0]+=depth_image[x][y]
-        #         # color_image[x][y][1]+=depth_image[x][y]
-        #         # color_image[x][y][2]+=depth_image[x][y]
-        #         # color_image[x][y][0]+=1
-        #         # color_image[x][y][1]+=1
-        #         # color_image[x][y][2]+=1
-        #         pass
 
-        for x in range(100):
-            for y in range(100):
-                color_image[x+100][y+100][0]+=1
-                color_image[x+100][y+100][1]+=1
-                color_image[x+100][y+100][2]+=1
-        print("before")
-        print(color_image[101][101])
-        color_image[101][101][0]+=1234
-        print("after")
-        print(color_image[101][101])
+        for x in r:
+            for y in r:
+                newValue = 1 #int(((depth_image[x][y]) * (365)) / (2000))
+                color_image[x][y][0]+= newValue
+                color_image[x][y][1]+= newValue
+                color_image[x][y][2]+= newValue
+
+        # print("before")
+        # print(color_image[101][101])
+        # color_image[101][101][0]+=1234
+        # print("after")
+        # print(color_image[101][101])
         # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
         depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
 
