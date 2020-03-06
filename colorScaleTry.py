@@ -1,5 +1,5 @@
 
-
+import random
 import pyrealsense2 as rs
 import numpy as np
 import cv2
@@ -32,16 +32,22 @@ try:
             continue
 
         # Convert images to numpy arrays
-
+        n = random.randint(-100, 100)
+        print(n)
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
-
-        for x in r:
-            for y in r:
-                newValue = 1 #int(((depth_image[x][y]) * (365)) / (2000))
-                color_image[x][y][0]+= newValue
-                color_image[x][y][1]+= newValue
-                color_image[x][y][2]+= newValue
+        print("start")
+        print(len(color_image))
+        print(len(color_image[0]))
+        print(len(color_image[0][0]))
+        print(len(color_image[0][0]))
+        color_image[0:640][0:480][49:479][45:300] += 100#int16(n)
+        # for x in r:
+        #     for y in r:
+        #         newValue = 1 #int(((depth_image[x][y]) * (365)) / (2000))
+        #         color_image[x][y][0]+= newValue
+        #         color_image[x][y][1]+= newValue
+        #         color_image[x][y][2]+= newValue
 
         # print("before")
         # print(color_image[101][101])
